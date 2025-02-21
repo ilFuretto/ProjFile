@@ -37,6 +37,8 @@
             aggiungi_btn = new Button();
             listBox1 = new ListBox();
             button1 = new Button();
+            modifica_btn = new Button();
+            elimina_btn = new Button();
             SuspendLayout();
             // 
             // textBox1
@@ -121,11 +123,35 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += cerca_btn_Click;
             // 
+            // modifica_btn
+            // 
+            modifica_btn.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            modifica_btn.Location = new Point(609, 266);
+            modifica_btn.Name = "modifica_btn";
+            modifica_btn.Size = new Size(107, 54);
+            modifica_btn.TabIndex = 9;
+            modifica_btn.Text = "MODIFICA";
+            modifica_btn.UseVisualStyleBackColor = true;
+            modifica_btn.Click += modifica_btn_Click;
+            // 
+            // elimina_btn
+            // 
+            elimina_btn.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            elimina_btn.Location = new Point(609, 339);
+            elimina_btn.Name = "elimina_btn";
+            elimina_btn.Size = new Size(107, 54);
+            elimina_btn.TabIndex = 10;
+            elimina_btn.Text = "ELIMINA";
+            elimina_btn.UseVisualStyleBackColor = true;
+            elimina_btn.Click += elimina_btn_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(elimina_btn);
+            Controls.Add(modifica_btn);
             Controls.Add(button1);
             Controls.Add(listBox1);
             Controls.Add(aggiungi_btn);
@@ -153,5 +179,7 @@
         private Button aggiungi_btn;
         private ListBox listBox1;
         private Button button1;
+        private Button modifica_btn;
+        private Button elimina_btn;
     }
 }

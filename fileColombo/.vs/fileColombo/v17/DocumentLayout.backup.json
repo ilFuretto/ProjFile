@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\admin\\Desktop\\ProjFile\\fileColombo\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{68EBF218-E1F6-4942-8AB9-D9298B73C779}|fileColombo\\fileColombo.csproj|c:\\users\\admin\\desktop\\projfile\\filecolombo\\filecolombo\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{68EBF218-E1F6-4942-8AB9-D9298B73C779}|fileColombo\\fileColombo.csproj|solutionrelative:filecolombo\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68EBF218-E1F6-4942-8AB9-D9298B73C779}|fileColombo\\fileColombo.csproj|c:\\users\\admin\\desktop\\projfile\\filecolombo\\filecolombo\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{68EBF218-E1F6-4942-8AB9-D9298B73C779}|fileColombo\\fileColombo.csproj|solutionrelative:filecolombo\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\Desktop\\ProjFile\\fileColombo\\fileColombo\\Form1.cs",
+              "RelativeDocumentMoniker": "fileColombo\\Form1.cs",
+              "ToolTip": "C:\\Users\\admin\\Desktop\\ProjFile\\fileColombo\\fileColombo\\Form1.cs*",
+              "RelativeToolTip": "fileColombo\\Form1.cs*",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAIwGIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-21T14:35:39.862Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs [Progettazione]",
+              "DocumentMoniker": "C:\\Users\\admin\\Desktop\\ProjFile\\fileColombo\\fileColombo\\Form1.cs",
+              "RelativeDocumentMoniker": "fileColombo\\Form1.cs",
+              "ToolTip": "C:\\Users\\admin\\Desktop\\ProjFile\\fileColombo\\fileColombo\\Form1.cs [Progettazione]*",
+              "RelativeToolTip": "fileColombo\\Form1.cs [Progettazione]*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-21T14:34:23.162Z",
+              "EditorCaption": " [Progettazione]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

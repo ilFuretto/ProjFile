@@ -20,26 +20,40 @@ namespace fileColombo
 
         private void caricaPersoneDaFile(string filename)
         {
+            listBox1.Items.Clear();
+            persone.Clear();
             if (File.Exists(filename))
             {
                 string[] lines = File.ReadAllLines(filename);
                 foreach (var line in lines)
                 {
-
                     listBox1.Items.Add(line);
+                    string[] parts = line.Split(new[] { "   " }, StringSplitOptions.None);
+                    if (parts.Length >= 3)
+                    {
+                        string id = parts[0].Replace("ID: ", "");
+                        string surname = parts[1].Replace("Cognome: ", "");
+                        string name = parts[2].Replace("Nome: ", "");
+                        persone.Add(new Persona(id, surname, name));
+                    }
                 }
             }
         }
-
 
         private void aggiungi_btn_Click(object sender, EventArgs e)
         {
             if (textBox1.Text.Length == 0 || textBox2.Text.Length == 0 || textBox3.Text.Length == 0)
                 return;
-            string caratteristiche;
-            Persona persona = new Persona(textBox1.Text, textBox2.Text, textBox3.Text);
 
-            caratteristiche = "ID: " + persona.Id + "   Cognome: " + persona.Surname + "   Nome: " + persona.Name;
+            string id = textBox1.Text;
+            if (persone.Any(p => p.Id == id))
+            {
+                MessageBox.Show("Errore: ID già esistente.");
+                return;
+            }
+
+            Persona persona = new Persona(id, textBox2.Text, textBox3.Text);
+            string caratteristiche = $"ID: {persona.Id}   Cognome: {persona.Surname}   Nome: {persona.Name}";
 
             scriviAppend("ListaPersone", caratteristiche);
             persone.Add(persona);
@@ -50,14 +64,54 @@ namespace fileColombo
         {
             string idDaCercare = textBox1.Text;
             string risultato = cercaPersonaPerId("ListaPersone", idDaCercare);
+            MessageBox.Show(risultato != null ? $"Persona trovata: {risultato}" : $"Persona con ID {idDaCercare} non trovata.");
+        }
 
-            if (risultato != null)
+        private void elimina_btn_Click(object sender, EventArgs e)
+        {
+            string idDaEliminare = textBox1.Text;
+            if (!persone.Any(p => p.Id == idDaEliminare))
             {
-                MessageBox.Show("Persona trovata: " + risultato);
+                MessageBox.Show("Errore: ID non trovato.");
+                return;
             }
-            else
+
+            eliminaPersonaPerId("ListaPersone", idDaEliminare);
+        }
+
+        private void modifica_btn_Click(object sender, EventArgs e)
+        {
+            string idDaModificare = textBox1.Text;
+            string nuovoCognome = textBox2.Text;
+            string nuovoNome = textBox3.Text;
+            modificaPersonaPerId("ListaPersone", idDaModificare, nuovoCognome, nuovoNome);
+        }
+
+        private void eliminaPersonaPerId(string filename, string id)
+        {
+            if (File.Exists(filename))
             {
-                MessageBox.Show("Persona con ID " + idDaCercare + " non trovata.");
+                var lines = File.ReadAllLines(filename).Where(line => !line.Contains($"ID: {id} ")).ToArray();
+                File.WriteAllLines(filename, lines);
+                caricaPersoneDaFile(filename);
+            }
+        }
+
+        private void modificaPersonaPerId(string filename, string id, string nuovoCognome, string nuovoNome)
+        {
+            if (File.Exists(filename))
+            {
+                var lines = File.ReadAllLines(filename).ToList();
+                for (int i = 0; i < lines.Count; i++)
+                {
+                    if (lines[i].Contains($"ID: {id} "))
+                    {
+                        lines[i] = $"ID: {id}   Cognome: {nuovoCognome}   Nome: {nuovoNome}";
+                        break;
+                    }
+                }
+                File.WriteAllLines(filename, lines);
+                caricaPersoneDaFile(filename);
             }
         }
 
@@ -78,6 +132,7 @@ namespace fileColombo
             return null; // Se la persona non è trovata
         }
 
+      
 
         public static void scriviAppend(string filename, string content)
         {
