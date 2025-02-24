@@ -19,8 +19,8 @@ namespace fileColombo
             Name = name;
         }
 
-        public string Id { get; protected set; }
-        public string Surname { get => surname; protected set => surname = value; }
-        public string Name { get => name; protected set => name = value; }
+        public string Id { get;  set; }
+        public string Surname { get => surname;  set => surname = value; }
+        public string Name { get => name;  set => name = value; }
     }   
 }

@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\admin\\Desktop\\ProjFile\\fileColombo\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{68EBF218-E1F6-4942-8AB9-D9298B73C779}|fileColombo\\fileColombo.csproj|c:\\users\\admin\\desktop\\projfile\\filecolombo\\filecolombo\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{68EBF218-E1F6-4942-8AB9-D9298B73C779}|fileColombo\\fileColombo.csproj|solutionrelative:filecolombo\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{68EBF218-E1F6-4942-8AB9-D9298B73C779}|fileColombo\\fileColombo.csproj|c:\\users\\admin\\desktop\\projfile\\filecolombo\\filecolombo\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{68EBF218-E1F6-4942-8AB9-D9298B73C779}|fileColombo\\fileColombo.csproj|solutionrelative:filecolombo\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{68EBF218-E1F6-4942-8AB9-D9298B73C779}|fileColombo\\fileColombo.csproj|c:\\users\\admin\\desktop\\projfile\\filecolombo\\filecolombo\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{68EBF218-E1F6-4942-8AB9-D9298B73C779}|fileColombo\\fileColombo.csproj|solutionrelative:filecolombo\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{68EBF218-E1F6-4942-8AB9-D9298B73C779}|fileColombo\\fileColombo.csproj|c:\\users\\admin\\desktop\\projfile\\filecolombo\\filecolombo\\persona.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{68EBF218-E1F6-4942-8AB9-D9298B73C779}|fileColombo\\fileColombo.csproj|solutionrelative:filecolombo\\persona.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,20 +26,33 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
+              "Title": "Persona.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\Desktop\\ProjFile\\fileColombo\\fileColombo\\Persona.cs",
+              "RelativeDocumentMoniker": "fileColombo\\Persona.cs",
+              "ToolTip": "C:\\Users\\admin\\Desktop\\ProjFile\\fileColombo\\fileColombo\\Persona.cs",
+              "RelativeToolTip": "fileColombo\\Persona.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-23T20:44:47.776Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\admin\\Desktop\\ProjFile\\fileColombo\\fileColombo\\Form1.cs",
               "RelativeDocumentMoniker": "fileColombo\\Form1.cs",
               "ToolTip": "C:\\Users\\admin\\Desktop\\ProjFile\\fileColombo\\fileColombo\\Form1.cs*",
               "RelativeToolTip": "fileColombo\\Form1.cs*",
-              "ViewState": "AgIAAEoAAAAAAAAAAAAIwGIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAlwJMAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-21T14:35:39.862Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Form1.cs [Progettazione]",
               "DocumentMoniker": "C:\\Users\\admin\\Desktop\\ProjFile\\fileColombo\\fileColombo\\Form1.cs",
               "RelativeDocumentMoniker": "fileColombo\\Form1.cs",

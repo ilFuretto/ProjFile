@@ -5,6 +5,8 @@ namespace fileColombo
     public partial class Form1 : Form
     {
         List<Persona> persone;
+        private const int RecordLength = 70; // Lunghezza fissa per ogni record
+
         public Form1()
         {
             InitializeComponent();
@@ -13,10 +15,8 @@ namespace fileColombo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Carica il contenuto del file nella ListBox al caricamento del form
             caricaPersoneDaFile("ListaPersone");
         }
-
 
         private void caricaPersoneDaFile(string filename)
         {
@@ -24,16 +24,16 @@ namespace fileColombo
             persone.Clear();
             if (File.Exists(filename))
             {
-                string[] lines = File.ReadAllLines(filename);
+                var lines = File.ReadAllLines(filename);
                 foreach (var line in lines)
                 {
                     listBox1.Items.Add(line);
-                    string[] parts = line.Split(new[] { "   " }, StringSplitOptions.None);
+                    var parts = line.Split(';');
                     if (parts.Length >= 3)
                     {
-                        string id = parts[0].Replace("ID: ", "");
-                        string surname = parts[1].Replace("Cognome: ", "");
-                        string name = parts[2].Replace("Nome: ", "");
+                        string id = parts[0].Trim();
+                        string surname = parts[1].Trim();
+                        string name = parts[2].Trim();
                         persone.Add(new Persona(id, surname, name));
                     }
                 }
@@ -42,7 +42,9 @@ namespace fileColombo
 
         private void aggiungi_btn_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text.Length == 0 || textBox2.Text.Length == 0 || textBox3.Text.Length == 0)
+            if (string.IsNullOrWhiteSpace(textBox1.Text) ||
+                string.IsNullOrWhiteSpace(textBox2.Text) ||
+                string.IsNullOrWhiteSpace(textBox3.Text))
                 return;
 
             string id = textBox1.Text;
@@ -53,18 +55,21 @@ namespace fileColombo
             }
 
             Persona persona = new Persona(id, textBox2.Text, textBox3.Text);
-            string caratteristiche = $"ID: {persona.Id}   Cognome: {persona.Surname}   Nome: {persona.Name}";
-
-            scriviAppend("ListaPersone", caratteristiche);
+            scriviAppend("ListaPersone", PersonaToString(persona));
             persone.Add(persona);
-            listBox1.Items.Add(caratteristiche);
+            listBox1.Items.Add(PersonaToString(persona));
         }
 
         private void cerca_btn_Click(object sender, EventArgs e)
         {
             string idDaCercare = textBox1.Text;
-            string risultato = cercaPersonaPerId("ListaPersone", idDaCercare);
-            MessageBox.Show(risultato != null ? $"Persona trovata: {risultato}" : $"Persona con ID {idDaCercare} non trovata.");
+            string risultato = cercaPersonaPerId(idDaCercare);
+            MessageBox.Show(risultato != null ? $"Persona trovata: {risultato}" : "Persona non trovata.");
+        }
+
+        private string cercaPersonaPerId(string id)
+        {
+            return persone.FirstOrDefault(p => p.Id == id)?.ToString();
         }
 
         private void elimina_btn_Click(object sender, EventArgs e)
@@ -76,7 +81,9 @@ namespace fileColombo
                 return;
             }
 
-            eliminaPersonaPerId("ListaPersone", idDaEliminare);
+            persone.RemoveAll(p => p.Id == idDaEliminare);
+            File.WriteAllLines("ListaPersone", persone.Select(p => PersonaToString(p)));
+            caricaPersoneDaFile("ListaPersone");
         }
 
         private void modifica_btn_Click(object sender, EventArgs e)
@@ -84,92 +91,59 @@ namespace fileColombo
             string idDaModificare = textBox1.Text;
             string nuovoCognome = textBox2.Text;
             string nuovoNome = textBox3.Text;
-            modificaPersonaPerId("ListaPersone", idDaModificare, nuovoCognome, nuovoNome);
-        }
 
-        private void eliminaPersonaPerId(string filename, string id)
-        {
-            if (File.Exists(filename))
+            var persona = persone.FirstOrDefault(p => p.Id == idDaModificare);
+            if (persona != null)
             {
-                var lines = File.ReadAllLines(filename).Where(line => !line.Contains($"ID: {id} ")).ToArray();
-                File.WriteAllLines(filename, lines);
-                caricaPersoneDaFile(filename);
+                persona.Surname = nuovoCognome;
+                persona.Name = nuovoNome;
+                File.WriteAllLines("ListaPersone", persone.Select(p => PersonaToString(p)));
+                caricaPersoneDaFile("ListaPersone");
             }
         }
-
-        private void modificaPersonaPerId(string filename, string id, string nuovoCognome, string nuovoNome)
-        {
-            if (File.Exists(filename))
-            {
-                var lines = File.ReadAllLines(filename).ToList();
-                for (int i = 0; i < lines.Count; i++)
-                {
-                    if (lines[i].Contains($"ID: {id} "))
-                    {
-                        lines[i] = $"ID: {id}   Cognome: {nuovoCognome}   Nome: {nuovoNome}";
-                        break;
-                    }
-                }
-                File.WriteAllLines(filename, lines);
-                caricaPersoneDaFile(filename);
-            }
-        }
-
-        private string cercaPersonaPerId(string filename, string id)
-        {
-            if (File.Exists(filename))
-            {
-                string[] lines = File.ReadAllLines(filename);
-                foreach (var line in lines)
-                {
-                    // Verifica se la riga contiene l'ID
-                    if (line.Contains("ID: " + id))
-                    {
-                        return line; // Restituisce la persona trovata
-                    }
-                }
-            }
-            return null; // Se la persona non è trovata
-        }
-
-      
 
         public static void scriviAppend(string filename, string content)
         {
-            var oStream = new FileStream(filename, FileMode.Append, FileAccess.Write, FileShare.Read);
-            StreamWriter sw = new StreamWriter(oStream);
-            sw.WriteLine(content);
-            sw.Close();
+            using (var sw = new StreamWriter(filename, true))
+            {
+                sw.WriteLine(content);
+            }
         }
 
-
-
-        //leggere-scrviere oggetti in json
-        // per altri esempi https://stackoverflow.com/questions/6115721/how-to-save-restore-serializable-object-to-from-file
-        public static void scriviOggettoPersona(string filename, Persona p)
+        private void cercaRiga_btn_Click(object sender, EventArgs e)
         {
-
-            string json = JsonConvert.SerializeObject(p);
-            File.WriteAllText(filename, json);
+            if (int.TryParse(textBox1.Text, out int riga) && riga > 0)
+            {
+                string risultato = accessoDirettoRiga("ListaPersone", riga, RecordLength)?.Trim('-');
+                MessageBox.Show(!string.IsNullOrWhiteSpace(risultato) ? $"Record trovato: {risultato}" : "Riga non trovata.");
+            }
+            else
+            {
+                MessageBox.Show("Inserisci un numero di riga valido.");
+            }
         }
 
-        public static Persona leggiOggettoPersona(string filename)
+        private string PersonaToString(Persona persona)
         {
-            string json = File.ReadAllText(filename);
-            Persona p = JsonConvert.DeserializeObject<Persona>(json);
-            return p;
+            string record = $"{persona.Id};{persona.Surname};{persona.Name}".PadRight(RecordLength, '-');
+            return record.Substring(0, RecordLength);
         }
 
 
         //gestione di file binari fixed lenght e accesso diretto
         public static string accessoDirettoRiga(string filename, int i, int bytesPerLine)
         {
-            Stream stream = File.Open(filename, FileMode.Open);
+            Stream stream = File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             stream.Seek(bytesPerLine * (i - 1), SeekOrigin.Begin);
             StreamReader reader = new StreamReader(stream);
-            string line = reader.ReadLine();
-            //BinaryReader rbin = new BinaryReader(stream);
-            //string line = System.Text.Encoding.UTF8.GetString(rbin.ReadBytes(bytesPerLine));
+
+            char[] buffer = new char[bytesPerLine];
+            reader.Read(buffer, 0, bytesPerLine);
+            string line = new string(buffer).Trim('-').Trim();
+
+            // Chiude esplicitamente il reader e il file stream
+            reader.Close();
+            stream.Close();
 
             return line;
         }

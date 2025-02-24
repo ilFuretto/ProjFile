@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("fileColombo")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+99b4c736ef7519fab69011934484205e043ef031")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5cd2dc61f67841b4c5252ee467d710007494ecbf")]
 [assembly: System.Reflection.AssemblyProductAttribute("fileColombo")]
 [assembly: System.Reflection.AssemblyTitleAttribute("fileColombo")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
